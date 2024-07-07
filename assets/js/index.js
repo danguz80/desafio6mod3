@@ -15,10 +15,10 @@ const crearGrafico = async(series) => {
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: fechas,
+            labels: fechas.slice(0, 10).reverse(),
             datasets: [{
                 label: `Variación de ${moneda.value}`,
-                data: data,
+                data: data.slice(0, 10).reverse(),
                 borderWidth: 1
             },
           ],
