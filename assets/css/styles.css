@@ -1,0 +1,27 @@
+body{
+    text-align: center;
+    background-color: rgb(6, 6, 43);
+    color: white;
+}
+
+#main{
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    width: 30rem;
+}
+
+select{
+    width: 30rem;
+}
+
+button{
+    width: 20rem;
+    margin-top: 1rem;
+}
+
+#html{
+    margin-top: 1rem;
+}
