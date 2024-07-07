@@ -5,18 +5,30 @@ const obtenerData = async (moneda) => {
         const res = await data.json()
         return res
     } catch (e) {
-    const errorSpan = document.querySelector("#errorspan")
-    errorSpan.innerHTML = `Algo salió mal! Error: ${e.message}`
-}}
+        const errorSpan = document.querySelector("#errorspan")
+        errorSpan.innerHTML = `Algo salió mal! Error: ${e.message}`
+    }
+}
 
 const crearGrafico = async (series) => {
     const data = series.map((serie) => serie.valor)
     const fechas = series.map((serie) => serie.fecha)
-    // const date = new Date(fechas)
-    // let nuevaFecha = date.toLocaleDateString()
     const ctx = document.getElementById('myChart');
 
+    //NO PUDE FORMATEAR LA FECHA, EN CONSOLE.LOG ME FUNCIONA, PERO NO SE ESCRIBE EN EL LABEL
+
+    // for (let i=0; i < fechas.length; i++) {
+    //     let fecha = fechas[i]
+    //     let grafico = Chart.getChart("myChart")
+
+    // if (grafico !== undefined) {
+    //     grafico.destroy()
+    // }
+    //     var date = new Date(fecha).toLocaleDateString()
+    //     console.log(date)
+    // }
     new Chart(ctx, {
+
         type: 'line',
         data: {
             labels: fechas.slice(0, 10).reverse(),
@@ -28,6 +40,7 @@ const crearGrafico = async (series) => {
             ],
         },
     });
+    
 }
 
 formulario.addEventListener("submit", async (event) => {
