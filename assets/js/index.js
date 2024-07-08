@@ -15,41 +15,42 @@ const crearGrafico = async (series) => {
     const fechas = series.map((serie) => serie.fecha)
     const ctx = document.getElementById('myChart');
 
-    //NO PUDE FORMATEAR LA FECHA, EN CONSOLE.LOG ME FUNCIONA, PERO NO SE ESCRIBE EN EL LABEL
+    let fechaFormat = []
+    for (let i = 0; i < fechas.length; i++) {
+        let fecha = fechas[i]
+        let fechaTransform = new Date(fecha).toLocaleDateString()
+        fechaFormat.push(fechaTransform)
 
-    // for (let i=0; i < fechas.length; i++) {
-    //     let fecha = fechas[i]
-    //     let grafico = Chart.getChart("myChart")
+        let grafico = Chart.getChart("myChart")
+
+        if (grafico !== undefined) {
+            grafico.destroy()
+        }
+
+        new Chart(ctx, {
+
+            type: 'line',
+            data: {
+                labels: fechaFormat.slice(0, 10).reverse(),
+                datasets: [{
+                    label: `Variación de ${moneda.value}`,
+                    data: data.slice(0, 10).reverse(),
+                    borderWidth: 1
+                },
+                ],
+            },
+        });
+    }
+}
+
+
+formulario.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    // let grafico = Chart.getChart("myChart")
 
     // if (grafico !== undefined) {
     //     grafico.destroy()
     // }
-    //     var date = new Date(fecha).toLocaleDateString()
-    //     console.log(date)
-    // }
-    new Chart(ctx, {
-
-        type: 'line',
-        data: {
-            labels: fechas.slice(0, 10).reverse(),
-            datasets: [{
-                label: `Variación de ${moneda.value}`,
-                data: data.slice(0, 10).reverse(),
-                borderWidth: 1
-            },
-            ],
-        },
-    });
-    
-}
-
-formulario.addEventListener("submit", async (event) => {
-    event.preventDefault()
-    let grafico = Chart.getChart("myChart")
-
-    if (grafico !== undefined) {
-        grafico.destroy()
-    }
 
     const clp = document.querySelector("#clp").value
     const moneda = document.querySelector("#moneda").value
@@ -71,6 +72,5 @@ formulario.addEventListener("submit", async (event) => {
 
     calculoFinal.innerHTML = html
 
-    // document.querySelector("#html").innerHTML = calculo
 })
 
